@@ -1,6 +1,17 @@
 from ClassWorker import Worker
 import csv
 
+def sort_dec(func):
+    def inner(self, field):
+        func(self, field)
+    return inner
+
+def search_dec(func):
+    def inner(self, field, value):
+        res = func(self, field, value)
+        return res
+    return inner
+
 class WorkerDB:
     def __init__(self):
         self.workers = []
@@ -66,3 +77,12 @@ class WorkerDB:
             writer = csv.writer(file)
             for w in self.workers:
                 writer.writerow([w.name, w.s_name, w.departament, w.salary])
+                
+    @sort_dec
+    def sort(self, field):
+        self.workers.sort(key=lambda x: getattr(x, field))
+        
+    @search_dec
+    def search(self, field, value):
+        res = list(filter(lambda x: getattr(x, field) == value, self.workers))
+        return res

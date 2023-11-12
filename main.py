@@ -10,7 +10,9 @@ def main():
         print("4. Display all.")
         print("5. Read from CSV.")
         print("6. Write to CSV.")
-        print("7. Exit")
+        print("7. Sort by a field.")
+        print("8. Search by a field and a value.")
+        print("9. Exit")
         
         choice = input("Enter your choice:")
         
@@ -32,6 +34,16 @@ def main():
             filename = input("Enter a filename to read from: ")
             worker_db.write_to_csv(filename)
         elif(choice == "7"):
+            field = input("Enter a field to sort(1-name, 2-second name, 3-dep., 4-salary): ")
+            worker_db.sort(field)
+        elif(choice == "8"):
+            field = input("Enter a field to search from(1-name, 2-second name, 3-dep., 4-salary): ")
+            value = input("Enter a value to search for: ")
+            res = worker_db.search(field, value)
+            print("Result: \n")
+            for r in res:
+                print(r)
+        elif(choice == "9"):
             break 
             
 
