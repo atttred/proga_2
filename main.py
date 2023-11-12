@@ -4,10 +4,11 @@ def main():
     worker_db = WorkerDB()
     while True:
         print("Menu:\n")
-        print("1. Add worker.\n")
-        print("2. Delete worker.\n")
-        print("3. Edit worker.\n")
-        print("4. Display all.\n")
+        print("1. Add worker.")
+        print("2. Delete worker.")
+        print("3. Edit worker.")
+        print("4. Display all.")
+        print("5. Read from CSV.")
         print("7. Exit")
         
         choice = input("Enter your choice:")
@@ -23,6 +24,9 @@ def main():
             worker_db.edit_by_id(id, field, value)
         elif(choice == "4"):
             worker_db.print_all()
+        elif(choice == "5"):
+            filename = input("Enter a filename to read from: ")
+            worker_db.read_form_csv(filename)
         elif(choice == "7"):
             exit  
             
