@@ -9,6 +9,7 @@ def main():
         print("3. Edit worker.")
         print("4. Display all.")
         print("5. Read from CSV.")
+        print("6. Write to CSV.")
         print("7. Exit")
         
         choice = input("Enter your choice:")
@@ -27,8 +28,11 @@ def main():
         elif(choice == "5"):
             filename = input("Enter a filename to read from: ")
             worker_db.read_form_csv(filename)
+        elif(choice == "6"):
+            filename = input("Enter a filename to read from: ")
+            worker_db.write_to_csv(filename)
         elif(choice == "7"):
-            exit  
+            break 
             
 
 if __name__ == "__main__":

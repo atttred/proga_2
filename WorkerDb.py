@@ -60,3 +60,9 @@ class WorkerDB:
         worker = Worker(name, s_name, departament, salary)
         worker.set_id(id)
         self.workers.append(worker)
+        
+    def write_to_csv(self, filename):
+        with open(filename, "a", newline='') as file:
+            writer = csv.writer(file)
+            for w in self.workers:
+                writer.writerow([w.name, w.s_name, w.departament, w.salary])
