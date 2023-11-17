@@ -28,6 +28,7 @@ class WorkerDB:
             id = self.workers[-1].get_id()
         
         worker = Worker(name, s_name, departament, salary)
+        worker.set_id(id+1)
         self.workers.append(worker)
         
     def delete_by_id(self):
