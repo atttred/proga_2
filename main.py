@@ -1,4 +1,15 @@
 from WorkerDb import WorkerDB
+import valdiator
+
+@valdiator.validate_int_input
+def get_int_input(x):
+    pass
+@valdiator.validate_string_input
+def get_str_input(x):
+    pass
+@valdiator.validate_file
+def get_file(x):
+    pass
 
 def main():
     worker_db = WorkerDB()
@@ -19,26 +30,33 @@ def main():
         if(choice == "1"):
             worker_db.add_worker()
         elif(choice == "2"):
-            worker_db.delete_by_id()
+            id = get_int_input("Enter id to delete: ")
+            worker_db.delete_by_id(id)
         elif(choice == "3"):
-            id = int(input("Enter id to edit: "))
-            field = input("Enter a field to edit(1-name, 2-second name, 3-dep., 4-salary): ")
-            value = input("Enter a new value for it: ")
+            id = get_int_input("Enter id to edit: ")
+            field = get_str_input("Enter a field to edit(name, second name, dep., salary): ")
+            if field == "salary":
+                value = get_int_input("Enter a new value for it: ")
+            else:
+                value = get_str_input("Enter a new value for it: ")                
             worker_db.edit_by_id(id, field, value)
         elif(choice == "4"):
             worker_db.print_all()
         elif(choice == "5"):
-            filename = input("Enter a filename to read from: ")
+            filename = get_file("Enter a filename to read from: ")
             worker_db.read_form_csv(filename)
         elif(choice == "6"):
-            filename = input("Enter a filename to read from: ")
+            filename = get_file("Enter a filename to write: ")
             worker_db.write_to_csv(filename)
         elif(choice == "7"):
-            field = input("Enter a field to sort(1-name, 2-second name, 3-dep., 4-salary): ")
+            field = get_str_input("Enter a field to sort(name, second name, dep., salary): ")
             worker_db.sort(field)
         elif(choice == "8"):
-            field = input("Enter a field to search from(1-name, 2-second name, 3-dep., 4-salary): ")
-            value = input("Enter a value to search for: ")
+            field = get_str_input("Enter a field to search(name, second name, dep., salary): ")
+            if field == "salary":
+                value = get_int_input("Enter a value to search for: ")
+            else:
+                value = get_str_input("Enter a value to search for: ")   
             res = worker_db.search(field, value)
             print("Result: \n")
             for r in res:
