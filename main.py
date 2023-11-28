@@ -28,7 +28,7 @@ def main():
         choice = input("Enter your choice:")
         
         if(choice == "1"):
-            worker_db.add_worker()
+            worker_db.add_worker_by_input()
         elif(choice == "2"):
             id = get_int_input("Enter id to delete: ")
             worker_db.delete_by_id(id)

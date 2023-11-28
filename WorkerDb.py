@@ -1,5 +1,13 @@
 from ClassWorker import Worker
+import valdiator
 import csv
+
+@valdiator.validate_int_input
+def get_int_input(x):
+    pass
+@valdiator.validate_string_input
+def get_str_input(x):
+    pass
 
 def sort_dec(func):
     def inner(self, field):
@@ -23,11 +31,16 @@ class WorkerDB:
     def __init__(self):
         self.workers = []
         
-    def add_worker(self):
-        name = input("Enter name: ")
-        s_name = input("Enter second name: ")
-        departament = input("Enter departament: ")
-        salary = input("Enter salary: ")
+    def add_worker(self, worker):
+        if isinstance(worker, Worker):
+            worker.set_id(next(WorkerDB.id_gen))
+            self.workers.append(worker)
+    
+    def add_worker_by_input(self):
+        name = get_str_input("Enter name: ")
+        s_name = get_str_input("Enter second name: ")
+        departament = get_str_input("Enter departament: ")
+        salary = get_int_input("Enter salary: ")
         
         """
         if(len(self.workers) == 0):
@@ -41,7 +54,7 @@ class WorkerDB:
         self.workers.append(worker)
         
     def delete_by_id(self, id):
-        self.workers.pop(id-1)
+        self.workers.pop(id)
         
     def print_all(self):
         for w in self.workers:
