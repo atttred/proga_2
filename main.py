@@ -1,4 +1,5 @@
 from WorkerDb import WorkerDB
+import tkinter as tk
 import valdiator
 
 @valdiator.validate_int_input
@@ -66,7 +67,17 @@ def main():
             worker_db.pie_by_departament()
         elif(choice == "10"):
             break 
-            
+   
+class WorkerTextApp:
+    def __init__(self, root):
+        self.db = WorkerDB()
+        self.db.read_form_csv("Workers.csv")
+        self.root = root
+        self.root.title("Workers")
+        self.button = tk.Button(root, text="Diagram", command = self.db.pie_by_departament)
+        self.button.pack(side=tk.LEFT)
 
 if __name__ == "__main__":
-    main()
+    root = tk.Tk()
+    app = WorkerTextApp(root)
+    root.mainloop()
