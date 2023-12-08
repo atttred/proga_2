@@ -23,7 +23,8 @@ def main():
         print("6. Write to CSV.")
         print("7. Sort by a field.")
         print("8. Search by a field and a value.")
-        print("9. Exit")
+        print("9. Diagram by departaments")
+        print("10. Exit")
         
         choice = input("Enter your choice:")
         
@@ -62,6 +63,8 @@ def main():
             for r in res:
                 print(r)
         elif(choice == "9"):
+            worker_db.pie_by_departament()
+        elif(choice == "10"):
             break 
             
 

@@ -1,6 +1,7 @@
 from ClassWorker import Worker
 import valdiator
 import csv
+import matplotlib.pyplot as plt
 
 @valdiator.validate_int_input
 def get_int_input(x):
@@ -110,3 +111,16 @@ class WorkerDB:
     def search(self, field, value):
         res = list(filter(lambda x: getattr(x, field) == value, self.workers))
         return res
+    
+    def pie_by_departament(self):
+        departaments = {}
+        for w in self.workers:
+            if w.departament in departaments:
+                departaments[w.departament] += 1
+            else:
+                departaments[w.departament] = 1
+        labels = departaments.keys()
+        values = departaments.values()
+        plt.pie(values, labels=labels)
+        plt.title("Workers by departaments")
+        plt.show()
