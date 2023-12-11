@@ -66,7 +66,7 @@ class WorkerDB:
         if(field == "name"):
             self.workers[id].name = value
         elif(field == "second name"):
-             self.workers[id].s_name = value
+             self.workers[id].secname = value
         elif(field == "departament"):
              self.workers[id].departament =value
         elif(field == "salary"):
@@ -101,11 +101,20 @@ class WorkerDB:
         with open(filename, "a", newline='') as file:
             writer = csv.writer(file)
             for w in self.workers:
-                writer.writerow([w.name, w.s_name, w.departament, w.salary])
+                writer.writerow([w.name, w.secname, w.departament, w.salary])
                 
     @sort_dec
     def sort(self, field):
-        self.workers.sort(key=lambda x: getattr(x, field))
+        def sort_key(x):
+            if field == "salary":
+                return int(x.salary)
+            value = getattr(x, field)
+            return value
+
+        if field == "salary":
+            self.workers = sorted(self.workers, key=sort_key)
+        else:
+            self.workers.sort(key=sort_key)
         
     @search_dec
     def search(self, field, value):
